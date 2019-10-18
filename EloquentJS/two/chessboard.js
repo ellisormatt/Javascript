@@ -22,25 +22,66 @@ if I have odd, ' '
 if I have even, '#'
 if I have 8, '/n'
 
-
+loop 1, ' '
+loop 2, 
+loop 9, 
 
 */
-
+/*
 let board = '';
 
 for(let i=1;i<9;i++){
     for(let x=1;x<9;x++){
-        if(x==8){
-            //write a '/n'
-            board += '\n';
-        } else if (x%2 == 1) {
-            //write a ' '
-            board += ' ';
+        if(i%2 == 1){
+            if(x==8){
+                //write a '/n'
+                board += '\n';
+            } else if (x%2 == 1) {
+                //write a ' '
+                board += ' ';
+            } else {
+                //write a '#'
+                board += '#';
+            }
         } else {
-            //write a '#'
-            board += '#';
+            if(x==8){
+                //write a '/n'
+                board += '\n';
+            } else if (x%2 == 1) {
+                //write a '#'
+                board += ' ';
+            } else {
+                //write a '#'
+                board += ' ';
+            }
         }
     }
 }
+*/
+
+let number = 10;
+let board = '';
+
+for(let i=1;i<number+1;i++) {
+    for(let x=1;x<number+1;x++){
+        if ((i+x)%2 == 0) {
+            board += ' ';
+        } else {
+            board += '#';
+        }
+    }
+    board += '\n';
+}
+
+
+
+
+
+
+
+
+
+
+
 
 console.log(board);
