@@ -42,7 +42,7 @@ const getVenues = async () => {
         const jsonResponse = await response.json();
         //console.log(jsonResponse);
         const venues = jsonResponse.response.groups[0].items.map(item=>item.venue);
-        console.log(venues);
+        //console.log(venues);
         return venues;
       }
     } catch (error) {
@@ -56,6 +56,7 @@ const getForecast = async () => {
     const response = await fetch(urlToFetch);
     if(response.ok) {
       const jsonResponse = await response.json();
+      console.log(jsonResponse);
       return jsonResponse;
     } else {
       throw new Error ('Request failed');
@@ -72,9 +73,8 @@ const renderVenues = (venues) => {
     // Add your code here:
     const venue = venues[index];
     const venueIcon = venue.categories[0].icon;
-    const venueImgSrc = `${venueIcon.src}bg_64${venueIcon.suffix}`;
-    
-    let venueContent = '';
+    const venueImgSrc = `${venueIcon.prefix}bg_64${venueIcon.suffix}`;
+    let venueContent = createVenueHTML(venue.name,venue.location,venueImgSrc);
     $venue.append(venueContent);
   });
   $destination.append(`<h2>${venues[0].location.city}</h2>`);
@@ -82,8 +82,9 @@ const renderVenues = (venues) => {
 
 const renderForecast = (day) => {
   // Add your code here:
-  
-	let weatherContent = '';
+  //const weatherContent = createWeatherHTML();
+
+	let weatherContent = createWeatherHTML(day);
   $weatherDiv.append(weatherContent);
 }
 
@@ -92,8 +93,8 @@ const executeSearch = () => {
   $weatherDiv.empty();
   $destination.empty();
   $container.css("visibility", "visible");
-  getVenues()
-  getForecast()
+  getVenues().then(venues=>renderVenues(venues));
+  getForecast().then(jsonResponse=>renderForecast(jsonResponse));
   return false;
 }
 
