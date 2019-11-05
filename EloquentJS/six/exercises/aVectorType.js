@@ -12,18 +12,21 @@ class Vec {
         this.x = x;
         this.y = y;
     }
-
-    plus (anotherVector) {
-        return 
+    plus (input) {
+        //console.log(`add input ${inputX} to existing ${this.x}`);
+        this.x += input.x;
+        this.y += input.y;
+        return this;
     }
-
-    minus () {
-
+    minus (input) {
+        this.x -= input.x;
+        this.y -= input.y;
+        return this;
+    }
+    get length () {
+        return Math.sqrt((this.x*this.x)+(this.y*this.y));
     }
 }
-
-
-
 
 console.log(new Vec(1, 2).plus(new Vec(2, 3)));
 // → Vec{x: 3, y: 5}
